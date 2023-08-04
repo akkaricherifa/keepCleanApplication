@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface IServiceOuvrier {
     public List<Ouvrier> getAllOuvrier();
     public Ouvrier addOuvrier(Ouvrier ov);
