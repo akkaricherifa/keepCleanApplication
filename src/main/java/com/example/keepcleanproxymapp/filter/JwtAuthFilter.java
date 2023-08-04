@@ -1,5 +1,6 @@
 package com.example.keepcleanproxymapp.filter;
 
+import com.example.keepcleanproxymapp.service.AppUserService;
 import com.example.keepcleanproxymapp.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,6 +22,7 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+    private final AppUserService userDetailsService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {
 

@@ -82,10 +82,20 @@ public class AppUser implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-    
+    public Long getId() {
+        return id;
+    }
+
+    public AppUserRole getAppUserRole() {
+        return appUserRole;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 }
