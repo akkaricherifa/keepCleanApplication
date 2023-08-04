@@ -2,6 +2,7 @@ package com.example.keepcleanproxymapp.controller;
 
 import com.example.keepcleanproxymapp.entities.Ouvrier;
 import com.example.keepcleanproxymapp.repository.OuvrierRepo;
+import com.example.keepcleanproxymapp.service.IServiceOuvrier;
 import com.example.keepcleanproxymapp.service.OuvrierService;
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.keepcleanproxymapp.service.OuvrierService.save;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,35 +20,44 @@ import static com.example.keepcleanproxymapp.service.OuvrierService.save;
 
 
 public class OuvrierController {
+    private final IServiceOuvrier iso;
 
 
     @PostMapping("/add")
-    public  ResponseEntity<Ouvrier> addOuvrier(@RequestBody Ouvrier ouvrier) {
-        Ouvrier newOuvrier = save(ouvrier);
-        return new ResponseEntity<>(newOuvrier, HttpStatus.CREATED);
+    public  Ouvrier ajouterOuvrier(Ouvrier ouvrier){
+        return iso.addOuvrier(ouvrier);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Ouvrier>> getAllOuvriers() {
-        return new ResponseEntity<>(OuvrierService.getAll(), HttpStatus.OK);
+    public List<Ouvrier> getAllOuvriers() {
+        return iso.getAllOuvrier();
     }
 
-    @GetMapping("/get/{name}")
-    public ResponseEntity<Ouvrier> getOuvrierById(@PathVariable("name") String name) {
-        Ouvrier ouvrier = OuvrierService.getByName(name);
-        return new ResponseEntity<>(ouvrier, HttpStatus.OK);
+    @GetMapping("/{name}")
+    public ResponseEntity<Ouvrier> getProductByName(@PathVariable String name) {
+        Ouvrier ouvrier = iso.getByName(name);
+        if (ouvrier != null) {
+            return ResponseEntity.ok(ouvrier);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Ouvrier> updateOuvrier(@PathVariable("id") long id, @RequestBody Ouvrier ouvrier) {
-        ouvrier.setId((int) id);
-        Ouvrier updatedOuvrier = OuvrierService.update(ouvrier);
+        ouvrier.setId((Long) id);
+        Ouvrier updatedOuvrier = iso.UpdateOuvrier(ouvrier);
         return new ResponseEntity<>(updatedOuvrier, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteOuvrier(@PathVariable("id") long id) {
-        OuvrierService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public void deleteOuvrier(@PathVariable("id") long id) {
+        iso.deleteOuvrier(id);
+
     }
+
+
+
+
 
 
 

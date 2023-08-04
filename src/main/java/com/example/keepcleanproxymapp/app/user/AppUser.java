@@ -2,6 +2,7 @@ package com.example.keepcleanproxymapp.app.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Setter
+@Getter
 @NoArgsConstructor
 @Entity
 @AllArgsConstructor
@@ -49,7 +51,7 @@ public class AppUser implements UserDetails {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
         return Collections.singletonList(authority);
     }
-    }
+
 
     @Override
     public String getPassword() {

@@ -19,5 +19,5 @@ public interface OuvrierRepo extends JpaRepository<Ouvrier, Long> {
 
     Optional<Ouvrier> findById(@NotNull Long id);
 
-    Optional<Ouvrier> findByName(String name);
+    Ouvrier findByName(String name);
 }

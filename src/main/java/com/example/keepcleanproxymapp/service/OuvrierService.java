@@ -11,58 +11,68 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class OuvrierService {
+public class OuvrierService implements IServiceOuvrier {
 
-    private final OuvrierRepo ouvrierRepo;
-
-
-    ///////////////////////save ///////////////////////////////
-    public  Ouvrier save(Ouvrier ouvrier) {
-        if (ouvrierRepo.existsByEmail(ouvrier.getEmail())) {
-            throw new RuntimeException("email déja existe");
-        }
-        if (ouvrierRepo.existsByName(ouvrier.getName())) {
-            throw new RuntimeException("nom déja existe");
-        }
-        if (ouvrierRepo.existsByTel(ouvrier.getTel())) {
-            throw new RuntimeException("numero de télephone déja existe");
-        }
+    @Autowired
+    OuvrierRepo ouvrierRepo;
 
 
-        return ouvrierRepo.save(ouvrier);
+    public Ouvrier getOuvrierByName(String name){
+        return ouvrierRepo.findByName(name);
     }
 
-    /////////////////liste all ouvrier/////////////////////
-    public  List<Ouvrier> getAll() {
+
+    @Override
+    public List<Ouvrier> getAllOuvrier() {
         return ouvrierRepo.findAll();
     }
 
-
-    ///////////////////get by name//////////////
-    public  Ouvrier getByName(String name) {
-        return ouvrierRepo.findByName(name).orElse(null);
-    }
-
-    //////////////////supprimerrrr////////////////////////
-    public  void delete(long id) {
-        Ouvrier ouvrier = ouvrierRepo.findById(id).orElse(null);
-
-        ouvrierRepo.deleteById(id);
-    }
-
-    public Ouvrier update(Ouvrier ouvrier) {
-        Ouvrier existingOuvrier = ouvrierRepo.findById((long) ouvrier.getId()).orElse(null);
-        if (!ouvrier.getEmail().equals(existingOuvrier.getEmail()) && ouvrierRepo.existsByEmail(ouvrier.getEmail())) {
+    @Override
+    public Ouvrier addOuvrier(Ouvrier ov) {
+        if (ouvrierRepo.existsByEmail(ov.getEmail())) {
             throw new RuntimeException("email déja existe");
         }
-        if (!ouvrier.getName().equals(existingOuvrier.getName()) && ouvrierRepo.existsByName(ouvrier.getName())) {
+        if (ouvrierRepo.existsByName(ov.getName())) {
             throw new RuntimeException("nom déja existe");
         }
-        if (ouvrier.getTel() != existingOuvrier.getTel() && ouvrierRepo.existsByTel(ouvrier.getTel())) {
+        if (ouvrierRepo.existsByTel(ov.getTel())) {
+            throw new RuntimeException("numero de télephone déja existe");
+        }
+        return ouvrierRepo.save(ov);
+    }
+
+    @Override
+    public void deleteOuvrier(Long id) {
+        ouvrierRepo.deleteById(id);
+
+    }
+
+    @Override
+    public Ouvrier findById(Long id) {
+        return ouvrierRepo.findById(id).get();
+    }
+
+    @Override
+    public Ouvrier UpdateOuvrier(Ouvrier ov) {
+        Ouvrier existingOuvrier = ouvrierRepo.findById((long) ov.getId()).orElse(null);
+        if (!ov.getEmail().equals(existingOuvrier.getEmail()) && ouvrierRepo.existsByEmail(ov.getEmail())) {
+            throw new RuntimeException("email déja existe");
+        }
+        if (!ov.getName().equals(existingOuvrier.getName()) && ouvrierRepo.existsByName(ov.getName())) {
+            throw new RuntimeException("nom déja existe");
+        }
+        if (ov.getTel() != existingOuvrier.getTel() && ouvrierRepo.existsByTel(ov.getTel())) {
             throw new RuntimeException("numero de télephone déja existe");
         }
 
         assert existingOuvrier != null;
         return ouvrierRepo.save(existingOuvrier);
+    }
+
+
+
+    @Override
+    public Ouvrier getByName(String name) {
+        return ouvrierRepo.findByName(name);
     }
 }
