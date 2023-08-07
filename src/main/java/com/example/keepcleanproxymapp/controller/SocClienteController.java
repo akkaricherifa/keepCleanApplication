@@ -4,9 +4,9 @@ import com.example.keepcleanproxymapp.entities.Ouvrier;
 import com.example.keepcleanproxymapp.entities.SocieteCliente;
 import com.example.keepcleanproxymapp.service.IServiceSocieteCliente;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,10 +14,26 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/SocCliente")
 public class SocClienteController {
-    private IServiceSocieteCliente iServiceSocieteCliente;
+    private final IServiceSocieteCliente isc;
 
+    @PostMapping("/add")
+    public  SocieteCliente ajouterSocCliente(SocieteCliente societeCliente) {
+        return isc.addSocieteCliente(societeCliente);
+    }
     @GetMapping("/all")
-    public List<SocieteCliente> getAllSocClientes() {
-        return iServiceSocieteCliente.getAllSocClientes();
+    public List<SocieteCliente> getAllSocieteClientes() {
+        return isc.getAllSocieteClientes();
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<SocieteCliente> updateSocieteCliente(@PathVariable("id") long id, @RequestBody SocieteCliente sc) {
+        sc.setId((Long) id);
+        SocieteCliente updatedSocieteCliente = isc.UpdateSocieteCliente(sc);
+        return new ResponseEntity<>(updatedSocieteCliente, HttpStatus.OK);
+    }
+    @DeleteMapping("/delete/{id}")
+    public void deleteSocieteCliente(@PathVariable("id") long id) {
+        isc.deleteSocieteCliente(id);
+
     }
 }

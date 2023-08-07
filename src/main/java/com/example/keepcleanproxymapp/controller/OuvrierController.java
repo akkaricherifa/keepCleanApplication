@@ -24,17 +24,17 @@ public class OuvrierController {
 
 
     @PostMapping("/add")
-    public  Ouvrier ajouterOuvrier(Ouvrier ouvrier){
+    public  Ouvrier ajouterOuvrier(Ouvrier ouvrier) {
         return iso.addOuvrier(ouvrier);
     }
 
     @GetMapping("/all")
-    public List<Ouvrier> getAllOuvriers() {
+    public List<Ouvrier> getAllOuvrier() {
         return iso.getAllOuvrier();
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<Ouvrier> getProductByName(@PathVariable String name) {
+    public ResponseEntity<Ouvrier> getOuvrierByName(@PathVariable String name) {
         Ouvrier ouvrier = iso.getByName(name);
         if (ouvrier != null) {
             return ResponseEntity.ok(ouvrier);
@@ -49,6 +49,7 @@ public class OuvrierController {
         Ouvrier updatedOuvrier = iso.UpdateOuvrier(ouvrier);
         return new ResponseEntity<>(updatedOuvrier, HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public void deleteOuvrier(@PathVariable("id") long id) {
         iso.deleteOuvrier(id);

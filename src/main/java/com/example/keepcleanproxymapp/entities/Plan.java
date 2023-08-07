@@ -1,9 +1,6 @@
 package com.example.keepcleanproxymapp.entities;
-import com.example.keepcleanproxymapp.entities.Ouvrier;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -15,12 +12,12 @@ import java.util.Date;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class OuvrierPlanning {
+public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private @DateTimeFormat(pattern = "yyyy-'W'ww") Date week;
-    private Ouvrier ouvrier;
+
     private String LUNDI;
     private String MARDI;
     private String MERCREDI;
@@ -28,5 +25,6 @@ public class OuvrierPlanning {
     private String VENDREDI;
     private String SAMEDI;
     private String DIMANCHE;
-
+    @OneToOne
+    private Ouvrier ouvrier;
 }

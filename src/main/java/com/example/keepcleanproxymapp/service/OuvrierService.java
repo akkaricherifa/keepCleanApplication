@@ -17,10 +17,10 @@ public class OuvrierService implements IServiceOuvrier {
     OuvrierRepo ouvrierRepo;
 
 
-    public Ouvrier getOuvrierByName(String name){
+    @Override
+    public Ouvrier getByName(String name) {
         return ouvrierRepo.findByName(name);
     }
-
 
     @Override
     public List<Ouvrier> getAllOuvrier() {
@@ -71,8 +71,5 @@ public class OuvrierService implements IServiceOuvrier {
 
 
 
-    @Override
-    public Ouvrier getByName(String name) {
-        return ouvrierRepo.findByName(name);
-    }
+
 }
