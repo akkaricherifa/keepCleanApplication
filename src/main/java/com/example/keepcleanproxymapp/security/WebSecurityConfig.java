@@ -21,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @AllArgsConstructor
 @Configuration
@@ -31,17 +32,16 @@ public class WebSecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final AppUserService appUserService;
     private final AppUserRepository appUserRepository;
-    private final OAuth2ResourceServerConfigurer oAuth2ResourceServerConfigurer;
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/token/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(requests -> {
+                    requests.requestMatchers(new AntPathRequestMatcher("/"), new AntPathRequestMatcher("/style.css")).permitAll();
+                    requests.requestMatchers(new AntPathRequestMatcher("/secure/**")).hasAuthority("MyAuthority");
+                })
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

@@ -24,18 +24,18 @@ public class ScheduleController {
         this.scheduleService = scheduleService;
     }
 
-    @GetMapping("/getOuvrierPlanning/{id}")
-    public ResponseEntity<List<CleaningSchedule>> getOuvrierPlanning(@PathVariable("week") String week, @PathVariable("id") long id){
-      try {
-          SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-          Date weekDate = dateFormat.parse(week) ;
-          List<CleaningSchedule> shiftRequirements = scheduleService.generateOuvrierPlanning(weekDate,id);
-          return  ResponseEntity.ok(shiftRequirements);
-      } catch (ParseException e) {
-          e.printStackTrace();
-          return ResponseEntity.badRequest().build();
-      }
-    }
+//    @GetMapping("/getOuvrierPlanning/{id}")
+//    public ResponseEntity<List<CleaningSchedule>> getOuvrierPlanning(@PathVariable("week") String week, @PathVariable("id") long id){
+//      try {
+//          SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//          Date weekDate = dateFormat.parse(week) ;
+//          List<CleaningSchedule> shiftRequirements = scheduleService.generateOuvrierPlanning(weekDate,id);
+//          return  ResponseEntity.ok(shiftRequirements);
+//      } catch (ParseException e) {
+//          e.printStackTrace();
+//          return ResponseEntity.badRequest().build();
+//      }
+//    }
 
 
 //    @PostMapping("/addOuvrierPlanning/{id}")
