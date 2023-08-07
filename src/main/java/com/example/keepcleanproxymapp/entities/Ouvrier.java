@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ *
+ */
 @Data
 @Entity
 @NoArgsConstructor
@@ -27,11 +30,11 @@ public class Ouvrier {
     private Long tel;
     private String age;
 
-    @JsonIgnoreProperties("ouvrier")
-    @OneToMany(mappedBy = "ouvrier",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    List<CleaningSchedule> CleaningSchedule;
 
-    public Ouvrier(String name,String prenom,String adresse,String email, String genre, Long tel, String age) {
+    @OneToMany(mappedBy = "ouvrier", fetch = FetchType.LAZY, orphanRemoval = true)
+   private List<CleaningSchedule> cleaningSchedules;
+
+    public Ouvrier (String name,String prenom,String adresse,String email, String genre, Long tel, String age) {
         this.name = name;
         this.prenom = prenom;
         this.adresse = adresse;

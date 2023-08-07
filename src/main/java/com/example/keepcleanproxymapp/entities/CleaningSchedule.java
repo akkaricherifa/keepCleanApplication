@@ -28,4 +28,7 @@ public class CleaningSchedule {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDay;
 
+    @ManyToOne
+    private Ouvrier ouvrier;
+
 }
