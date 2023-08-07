@@ -17,8 +17,8 @@ public class SocieteCliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String adresse;
+    private String adresseSoc;
     private String email;
-    private String tel;
+    private String telSoc;
 
 }

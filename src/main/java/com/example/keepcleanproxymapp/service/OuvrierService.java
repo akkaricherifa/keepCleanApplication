@@ -21,6 +21,15 @@ public class OuvrierService implements IServiceOuvrier {
     public Ouvrier getByName(String name) {
         return ouvrierRepo.findByName(name);
     }
+    @Override
+    public void saveOuvrier(Ouvrier ouvrier) {
+        ouvrierRepo.save(ouvrier);
+    }
+    @Override
+    public Ouvrier getOuvrierById(Long id) {
+        Optional<Ouvrier> optionalOuvrier = ouvrierRepo.findById(id);
+        return optionalOuvrier.orElse(null);
+    }
 
     @Override
     public List<Ouvrier> getAllOuvrier() {

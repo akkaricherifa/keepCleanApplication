@@ -1,20 +1,22 @@
 package com.example.keepcleanproxymapp.controller;
 
 import com.example.keepcleanproxymapp.entities.CleaningSchedule;
+import com.example.keepcleanproxymapp.entities.Ouvrier;
+import com.example.keepcleanproxymapp.service.OuvrierService;
 import com.example.keepcleanproxymapp.service.ScheduleService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static org.springframework.web.servlet.function.ServerResponse.badRequest;
+
 @RestController
-@RequestMapping("/api/schedule")
+@RequestMapping("/schedule")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
@@ -34,4 +36,22 @@ public class ScheduleController {
           return ResponseEntity.badRequest().build();
       }
     }
+
+
+    @PostMapping("/addOuvrierPlanning/{id}")
+    public ResponseEntity<CleaningSchedule> addOuvrierPlanning(@PathVariable("week") String week, @RequestBody CleaningSchedule cleaningSchedule) throws ParseException{
+        Ouvrier ouvrier = OuvrierService.getOuvrierById(id);
+        if (ouvrier == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (cleaningSchedule == null) {
+            return ResponseEntity<String>badRequest().body("Le planning est incomplet.");
+        }
+        ouvrier.setPlanning(cleaningSchedule);
+        OuvrierService.saveOuvrier(ouvrier);
+
+        return ResponseEntity.ok("Le planning a été ajouté avec succès.");
+    }
+    }
+
 }
