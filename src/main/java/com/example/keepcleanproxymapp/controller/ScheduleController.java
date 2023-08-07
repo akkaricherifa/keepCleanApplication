@@ -38,20 +38,22 @@ public class ScheduleController {
     }
 
 
-    @PostMapping("/addOuvrierPlanning/{id}")
-    public ResponseEntity<CleaningSchedule> addOuvrierPlanning(@PathVariable("week") String week, @RequestBody CleaningSchedule cleaningSchedule) throws ParseException{
-        Ouvrier ouvrier = OuvrierService.getOuvrierById(id);
-        if (ouvrier == null) {
-            return ResponseEntity.notFound().build();
-        }
-        if (cleaningSchedule == null) {
-            return ResponseEntity<String>badRequest().body("Le planning est incomplet.");
-        }
-        ouvrier.setPlanning(cleaningSchedule);
-        OuvrierService.saveOuvrier(ouvrier);
-
-        return ResponseEntity.ok("Le planning a été ajouté avec succès.");
-    }
-    }
-
+//    @PostMapping("/addOuvrierPlanning/{id}")
+//    public ResponseEntity<CleaningSchedule> addOuvrierPlanning(@PathVariable("week") String week, @RequestBody CleaningSchedule cleaningSchedule) throws ParseException {
+//        Ouvrier ouvrier = OuvrierService.getOuvrierById("id");
+//        if (ouvrier == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        if (cleaningSchedule == null) {
+//            return ResponseEntity.ok().badRequest().body("Le planning est incomplet.");
+//        }
+//        ouvrier.setPlanning(cleaningSchedule);
+//        OuvrierService.saveOuvrier(ouvrier);
+//
+//        return ResponseEntity.ok("Le planning a été ajouté avec succès.");
+//    }
+//    }
+//
+//
+//    @PutMapping("/updateOuvrierPlanning/{id}")
 }

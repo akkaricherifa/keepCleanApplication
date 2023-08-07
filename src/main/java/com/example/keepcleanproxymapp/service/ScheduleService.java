@@ -20,6 +20,7 @@ public class ScheduleService {
 
 
 
+
 //    public List<CleaningSchedule> generateOuvrierPlanning(Date week, long user) {
 //        Map<Ouvrier, List<CleaningSchedule>> CleaningScheduleByOuvrier = CleaningScheduleByOuvrier.stream()
 //                .collect(Collectors.groupingBy(CleaningSchedule::getOuvrier));
