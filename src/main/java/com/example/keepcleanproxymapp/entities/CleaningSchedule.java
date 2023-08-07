@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class CleaningSchedule {
     private LocalTime startTime;
     private LocalTime endTime;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy") Date week;
     private LocalDate startDay;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDay;
