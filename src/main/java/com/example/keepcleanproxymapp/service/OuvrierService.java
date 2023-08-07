@@ -64,12 +64,7 @@ public class OuvrierService implements IServiceOuvrier {
         if (ov.getTel() != existingOuvrier.getTel() && ouvrierRepo.existsByTel(ov.getTel())) {
             throw new RuntimeException("numero de télephone déja existe");
         }
-
         assert existingOuvrier != null;
         return ouvrierRepo.save(existingOuvrier);
     }
-
-
-
-
 }

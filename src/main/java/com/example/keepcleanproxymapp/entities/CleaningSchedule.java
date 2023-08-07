@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -18,10 +20,12 @@ public class CleaningSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    @DateTimeFormat(pattern = "yyyy-'W'ww")
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    @OneToMany
-    private List <Ouvrier> ouvrier;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate startDay;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate endDay;
+
 }

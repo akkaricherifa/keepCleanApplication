@@ -13,12 +13,14 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SocClienteService implements IServiceSocieteCliente {
+
     @Autowired
     SocieteClienteRepo societeClienteRepo;
 
+
     @Override
-    public List<SocieteCliente> getAllSocClientes() {
-        return null;
+    public List<SocieteCliente> getAllSocieteClientes() {
+        return societeClienteRepo.findAll();
     }
 
     @Override
@@ -28,16 +30,17 @@ public class SocClienteService implements IServiceSocieteCliente {
 
     @Override
     public void deleteSocieteCliente(Long id) {
+        societeClienteRepo.deleteById(id);
 
     }
 
     @Override
     public SocieteCliente findById(Long id) {
-        return null;
+        return societeClienteRepo.findById(id).get();
     }
 
     @Override
-    public SocieteCliente UpdateSocieteCliente(Ouvrier ov) {
+    public SocieteCliente UpdateSocieteCliente(SocieteCliente sc) {
         return null;
     }
 

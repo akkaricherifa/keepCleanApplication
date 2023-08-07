@@ -24,20 +24,20 @@ public class Ouvrier {
     private String adresse;
     private String email;
     private String genre;
-    private Long Tel;
+    private Long tel;
     private String age;
 
     @JsonIgnoreProperties("ouvrier")
     @OneToMany(mappedBy = "ouvrier",cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     List<CleaningSchedule> CleaningSchedule;
 
-    public Ouvrier(String name,String prenom,String adresse,String email, String genre, Long Tel, String age) {
+    public Ouvrier(String name,String prenom,String adresse,String email, String genre, Long tel, String age) {
         this.name = name;
         this.prenom = prenom;
         this.adresse = adresse;
         this.email = email;
         this.genre = genre;
-        this.Tel = Tel;
+        this.tel = tel;
         this.age = age;
     }
 

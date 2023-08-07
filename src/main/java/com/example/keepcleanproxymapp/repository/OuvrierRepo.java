@@ -13,7 +13,7 @@ public interface OuvrierRepo extends JpaRepository<Ouvrier, Long> {
 
     boolean existsByEmail(String email);
 
-    boolean existsByTel(Long Tel);
+    boolean existsByTel(Long tel);
 
     @NotNull
 
