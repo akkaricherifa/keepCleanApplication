@@ -11,7 +11,7 @@ public interface IServiceOuvrier {
     Ouvrier getOuvrierById(Long id);
 
     public List<Ouvrier> getAllOuvrier();
-    public Ouvrier addOuvrier(Ouvrier ov);
+    public Ouvrier addOuvrier(Ouvrier ouvrier);
     public void deleteOuvrier(Long id);
     public Ouvrier findById(Long id);
     public Ouvrier UpdateOuvrier(Ouvrier ov);

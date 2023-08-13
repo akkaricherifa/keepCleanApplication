@@ -37,17 +37,17 @@ public class OuvrierService implements IServiceOuvrier {
     }
 
     @Override
-    public Ouvrier addOuvrier(Ouvrier ov) {
-        if (ouvrierRepo.existsByEmail(ov.getEmail())) {
+    public Ouvrier addOuvrier(Ouvrier ouvrier) {
+        if (ouvrierRepo.existsByEmail(ouvrier.getEmail())) {
             throw new RuntimeException("email déja existe");
         }
-        if (ouvrierRepo.existsByName(ov.getName())) {
+        if (ouvrierRepo.existsByName(ouvrier.getName())) {
             throw new RuntimeException("nom déja existe");
         }
-        if (ouvrierRepo.existsByTel(ov.getTel())) {
+        if (ouvrierRepo.existsByTel(ouvrier.getTel())) {
             throw new RuntimeException("numero de télephone déja existe");
         }
-        return ouvrierRepo.save(ov);
+        return ouvrierRepo.save(ouvrier);
     }
 
     @Override

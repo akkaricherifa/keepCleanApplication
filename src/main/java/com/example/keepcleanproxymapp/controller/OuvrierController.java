@@ -24,8 +24,9 @@ public class OuvrierController {
 
 
     @PostMapping("/add")
-    public  Ouvrier ajouterOuvrier(Ouvrier ouvrier) {
+    public  Ouvrier ajouterOuvrier(@RequestBody Ouvrier ouvrier) {
         return iso.addOuvrier(ouvrier);
+
     }
 
     @GetMapping("/all")
