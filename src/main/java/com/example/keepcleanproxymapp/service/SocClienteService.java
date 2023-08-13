@@ -48,4 +48,6 @@ public class SocClienteService implements IServiceSocieteCliente {
     public Ouvrier getByName(String name) {
         return null;
     }
+
+
 }

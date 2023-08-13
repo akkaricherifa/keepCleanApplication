@@ -34,15 +34,15 @@ public class Ouvrier {
     @OneToMany(mappedBy = "ouvrier", fetch = FetchType.LAZY, orphanRemoval = true)
    private List<CleaningSchedule> cleaningSchedules;
 
-    public Ouvrier (String name,String prenom,String adresse,String email, String genre, Long tel, String age) {
-        this.name = name;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.email = email;
-        this.genre = genre;
-        this.tel = tel;
-        this.age = age;
-    }
+//    public Ouvrier (String name,String prenom,String adresse,String email, String genre, Long tel, String age) {
+//        this.name = name;
+//        this.prenom = prenom;
+//        this.adresse = adresse;
+//        this.email = email;
+//        this.genre = genre;
+//        this.tel = tel;
+//        this.age = age;
+//    }
 
 }
 

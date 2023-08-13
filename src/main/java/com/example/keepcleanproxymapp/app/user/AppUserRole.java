@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum AppUserRole {
-    admin,
+    ADMIN,
     Ouvrier,
     SocieteCliente,
 

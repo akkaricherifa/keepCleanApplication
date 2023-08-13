@@ -4,12 +4,16 @@ import com.example.keepcleanproxymapp.entities.CleaningSchedule;
 import com.example.keepcleanproxymapp.entities.Ouvrier;
 import com.example.keepcleanproxymapp.service.OuvrierService;
 import com.example.keepcleanproxymapp.service.ScheduleService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -55,5 +59,7 @@ public class ScheduleController {
 //    }
 //
 //
-//    @PutMapping("/updateOuvrierPlanning/{id}")
+
+
+
 }
