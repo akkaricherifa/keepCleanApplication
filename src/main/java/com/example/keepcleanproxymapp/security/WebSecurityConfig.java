@@ -39,8 +39,8 @@ public class WebSecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(requests -> {
-                    requests.requestMatchers(new AntPathRequestMatcher("/"), new AntPathRequestMatcher("/style.css")).permitAll();
-                    requests.requestMatchers(new AntPathRequestMatcher("/secure/**")).hasAuthority("MyAuthority");
+                    requests.requestMatchers(new AntPathRequestMatcher("/**"), new AntPathRequestMatcher("/style.css")).permitAll();
+                    requests.requestMatchers(new AntPathRequestMatcher("/registration/**")).hasAuthority("MyAuthority");
                 })
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
