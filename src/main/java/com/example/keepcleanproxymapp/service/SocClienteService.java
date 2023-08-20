@@ -25,7 +25,13 @@ public class SocClienteService implements IServiceSocieteCliente {
 
     @Override
     public SocieteCliente addSocieteCliente(SocieteCliente sc) {
-        return null;
+        if (societeClienteRepo.existsByEmail(sc.getEmail())) {
+            throw new RuntimeException("email déja existe");
+        }
+        if (societeClienteRepo.existsByName(sc.getName())) {
+            throw new RuntimeException("nom déja existe");
+        }
+        return societeClienteRepo.save(sc);
     }
 
     @Override
@@ -41,7 +47,15 @@ public class SocClienteService implements IServiceSocieteCliente {
 
     @Override
     public SocieteCliente UpdateSocieteCliente(SocieteCliente sc) {
-        return null;
+        SocieteCliente existingSocieteCliente = societeClienteRepo.findById((long) sc.getId()).orElse(null);
+        if (!sc.getEmail().equals(existingSocieteCliente.getEmail()) && societeClienteRepo.existsByEmail(sc.getEmail())) {
+            throw new RuntimeException("email déja existe");
+        }
+        if (!sc.getName().equals(existingSocieteCliente.getName()) && societeClienteRepo.existsByName(sc.getName())) {
+            throw new RuntimeException("nom déja existe");
+        }
+        assert existingSocieteCliente != null;
+        return societeClienteRepo.save(existingSocieteCliente);
     }
 
     @Override

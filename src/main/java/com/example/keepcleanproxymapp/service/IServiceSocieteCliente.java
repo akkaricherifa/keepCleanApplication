@@ -12,6 +12,7 @@ public interface IServiceSocieteCliente {
 
     public void deleteSocieteCliente(Long id);
 
+
     public SocieteCliente findById(Long id);
 
     public SocieteCliente UpdateSocieteCliente(SocieteCliente sc);

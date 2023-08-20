@@ -17,9 +17,10 @@ public class SocClienteController {
     private final IServiceSocieteCliente isc;
 
     @PostMapping("/add")
-    public  SocieteCliente ajouterSocCliente(SocieteCliente societeCliente) {
+    public  SocieteCliente ajouterSocCliente( @RequestBody SocieteCliente societeCliente) {
         return isc.addSocieteCliente(societeCliente);
     }
+
     @GetMapping("/all")
     public List<SocieteCliente> getAllSocieteClientes() {
         return isc.getAllSocieteClientes();

@@ -44,13 +44,13 @@ public class OuvrierController {
         }
     }
 
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Ouvrier> updateOuvrier(@PathVariable("id") long id, @RequestBody Ouvrier ouvrier) {
         ouvrier.setId((Long) id);
         Ouvrier updatedOuvrier = iso.UpdateOuvrier(ouvrier);
         return new ResponseEntity<>(updatedOuvrier, HttpStatus.OK);
     }
-
     @DeleteMapping("/delete/{id}")
     public void deleteOuvrier(@PathVariable("id") long id) {
         iso.deleteOuvrier(id);
