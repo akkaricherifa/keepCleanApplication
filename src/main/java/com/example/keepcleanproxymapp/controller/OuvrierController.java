@@ -1,23 +1,14 @@
 package com.example.keepcleanproxymapp.controller;
-
 import com.example.keepcleanproxymapp.entities.Ouvrier;
-import com.example.keepcleanproxymapp.repository.OuvrierRepo;
+import com.example.keepcleanproxymapp.repository.AppUserRepository;
 import com.example.keepcleanproxymapp.service.IServiceOuvrier;
-import com.example.keepcleanproxymapp.service.OuvrierService;
-import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -28,8 +19,12 @@ public class OuvrierController {
     private final IServiceOuvrier iso;
 
 
+    @Autowired
+    private AppUserRepository appUserRepository;
+
+
     @PostMapping("/add")
-    public  Ouvrier ajouterOuvrier(@RequestBody Ouvrier ouvrier) {
+    public Ouvrier ajouterOuvrier(@RequestBody Ouvrier ouvrier) {
         return iso.addOuvrier(ouvrier);
 
     }
@@ -49,20 +44,20 @@ public class OuvrierController {
         }
     }
 
-
     @PutMapping("/update/{id}")
     public ResponseEntity<Ouvrier> updateOuvrier(@PathVariable("id") long id, @RequestBody Ouvrier ouvrier) {
         ouvrier.setId((Long) id);
         Ouvrier updatedOuvrier = iso.UpdateOuvrier(ouvrier);
         return new ResponseEntity<>(updatedOuvrier, HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public void deleteOuvrier(@PathVariable("id") long id) {
         iso.deleteOuvrier(id);
 
     }
 
-
+//cette methode pour avoir le plan d'un ouvrier
 //    @GetMapping("/ouvrierPlann/{week}/{id}")
 //    public ResponseEntity<List<Ouvrier>> getOuvrierPlannForWeek(@PathVariable("week") String week,@PathVariable("id") long id) {
 //
@@ -76,7 +71,18 @@ public class OuvrierController {
 //            return ResponseEntity.badRequest().build();
 //        }
 
-    }
+
+//    @PostMapping("/createPresence")
+//    public Presence createPresence(@RequestBody ObjectNode presence, @RequestParam Long id) throws JsonProcessingException {
+//        Presence pre = new Presence();
+//        pre.setNbrheures(new ObjectMapper().treeToValue(presence.get("nbrheures"), Integer.class));
+//        pre.setDay(LocalDate.parse(new ObjectMapper().treeToValue(presence.get("day"), String.class)));
+//        Optional<AppUser> user = appUserRepository.findById(id);
+//
+//        return presenceRepo.save(pre);
+//    }
+}
+
 
 
 
