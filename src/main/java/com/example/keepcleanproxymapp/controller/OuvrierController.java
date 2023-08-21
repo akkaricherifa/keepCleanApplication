@@ -11,6 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -58,10 +63,26 @@ public class OuvrierController {
     }
 
 
+//    @GetMapping("/ouvrierPlann/{week}/{id}")
+//    public ResponseEntity<List<Ouvrier>> getOuvrierPlannForWeek(@PathVariable("week") String week,@PathVariable("id") long id) {
+//
+//        try {
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-'W'ww");
+//            Date weekDate = dateFormat.parse(week);
+//            List<Ouvrier>  shiftRequirements = OuvrierService.getOuvrierPlannForWeek(weekDate,id);
+//            return ResponseEntity.ok(shiftRequirements);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().build();
+//        }
+
+    }
 
 
 
 
 
-}
+
+
+
 

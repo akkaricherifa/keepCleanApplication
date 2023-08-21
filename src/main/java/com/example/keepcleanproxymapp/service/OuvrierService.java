@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +24,12 @@ public class OuvrierService implements IServiceOuvrier {
     public Ouvrier getByName(String name) {
         return ouvrierRepo.findByName(name);
     }
+
     @Override
     public void saveOuvrier(Ouvrier ouvrier) {
         ouvrierRepo.save(ouvrier);
     }
+
     @Override
     public Ouvrier getOuvrierById(Long id) {
         Optional<Ouvrier> optionalOuvrier = ouvrierRepo.findById(id);
@@ -76,4 +81,15 @@ public class OuvrierService implements IServiceOuvrier {
         assert existingOuvrier != null;
         return ouvrierRepo.save(existingOuvrier);
     }
+
+
+//    public List<Ouvrier> getOuvrierPlannForWeek(Date week,long userId){
+//        List<Ouvrier> ouvrier=ouvrierRepo.findByWeek(week);
+//
+//
+//        return ouvrier;
+//    }
+
+
 }
+

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -57,7 +58,11 @@ public class RegistrationController {
         registrationService.deleteAppUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Optional<AppUserDTO>> getAppUserById (@PathVariable("id") Long id) {
+        Optional<AppUserDTO> appUser = registrationService.findById(id);
+        return new ResponseEntity<>(appUser, HttpStatus.OK);
+    }
 
     @GetMapping(path = "confirm")
     public String confirm(@RequestParam("token") String token) {
