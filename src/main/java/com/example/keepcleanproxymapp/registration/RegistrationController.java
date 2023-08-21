@@ -31,7 +31,7 @@ public class RegistrationController {
         if(appUserRepository.findByEmail(request.email()).isPresent()) {
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
 
-        }else{
+        }else {
             return new ResponseEntity<>(registrationService.register(request), HttpStatus.OK);
         }
 
